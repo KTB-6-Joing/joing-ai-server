@@ -22,7 +22,7 @@ ENV PYTHONPATH=/app/src \
     AWS_REGION=ap-northeast-2 \
     PORT=8000
 
-COPY src src
+COPY ./src /app/src
 
 EXPOSE ${PORT}
 

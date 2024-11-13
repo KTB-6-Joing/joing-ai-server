@@ -24,11 +24,9 @@ ENV PYTHONPATH=/app/src \
     AWS_REGION=ap-northeast-2 \
     PORT=8000
 
-# COPY ./src /app/src
-
 EXPOSE ${PORT}
 
-# Healthcheck -- 3
+# Healthcheck
 # HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 #   CMD curl -v http://localhost:${PORT}/ready | jq -e '.status == "ok"' || exit 1
 

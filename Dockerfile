@@ -26,6 +26,7 @@ ENV PYTHONPATH=/app/src \
 
 EXPOSE ${PORT}
 
+# 1
 # HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 #   CMD curl -v http://localhost:${PORT}/ready | jq -e '.status == "ok"' || exit 1
 

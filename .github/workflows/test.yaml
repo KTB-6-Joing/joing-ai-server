@@ -4,6 +4,8 @@ name: FastAPI CI Pipeline
 on:
   push:
     branches: [ "build/TestBranch" ]
+    paths-ignore:
+      - 'src/rec_system/**'
 
 jobs:
   quality-and-build:

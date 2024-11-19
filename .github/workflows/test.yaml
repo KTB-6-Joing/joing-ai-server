@@ -1,0 +1,7 @@
+# FastAPI CI pipeline
+
+on:
+  push:
+    branches: [ "build/TestBranch" ]
+
+jobs:

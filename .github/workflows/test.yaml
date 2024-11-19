@@ -75,11 +75,8 @@ jobs:
       with:
         args: |
           {
-            "sender": [ "JOING CI BOT" ],
-            "content":
-              " 빌드 성공!!!\n
-              **Branch**: ${{ github.ref_name }}\n
-              **Build Number**: ${{ github.run_number }} "
+            "sender": "JOING CI BOT",
+            "content": "빌드 성공!!!\n**Branch**: ${{ github.ref_name }}\n**Build Number**: ${{ github.run_number }}"
           }
           
     - name: Send Discord Notification - Failure
@@ -90,12 +87,8 @@ jobs:
       with:
         args: |
           {
-            "sender": [ "JOING CI BOT" ],
-            "content":
-              " 빌드 실패...\n
-              **Branch**: ${{ github.ref_name }}\n
-              **Build Number**: ${{ github.run_number }}\n
-              **Action URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} "
+            "sender": "JOING CI BOT",
+            "content": "빌드 성공!!!\n**Branch**: ${{ github.ref_name }}\n**Build Number**: ${{ github.run_number }}\n**Action URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }
 
     - name: Cleanup

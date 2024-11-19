@@ -68,28 +68,28 @@ jobs:
     # 빌드 결과 알림
     - name: Send Discord Notification - Success
       if: success()
-      uses: Ilshidur/action-discord@master
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        # DISCORD_USERNAME: "GitHub Actions Bot"
+      uses: sarisia/actions-status-discord@v1
       with:
-        args: |
-          {
-            "sender": "JOING CI BOT",
-            "content": "빌드 성공!!!\n**Branch**: ${{ github.ref_name }}\n**Build Number**: ${{ github.run_number }}"
-          }
-          
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        title: "🎉 빌드 성공!"
+        description: |
+          **Branch**: ${{ github.ref_name }}
+          **Build Number**: ${{ github.run_number }}
+        color: 0x28A745  # 초록색
+        username: JOING CI BOT
+
     - name: Send Discord Notification - Failure
       if: failure()
-      uses: Ilshidur/action-discord@master
-      env:
-        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      uses: sarisia/actions-status-discord@v1
       with:
-        args: |
-          {
-            "sender": "JOING CI BOT",
-            "content": "빌드 성공!!!\n**Branch**: ${{ github.ref_name }}\n**Build Number**: ${{ github.run_number }}\n**Action URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          }
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        title: "❌ 빌드 실패"
+        description: |
+          **Branch**: ${{ github.ref_name }}
+          **Build Number**: ${{ github.run_number }}
+          **Action URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        color: 0xDC3545  # 빨간색
+        username: JOING CI BOT
 
     - name: Cleanup
       if: always()

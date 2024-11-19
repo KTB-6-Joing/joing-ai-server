@@ -3,7 +3,7 @@ name: FastAPI CI Pipeline
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "build/TestBranch" ]
 
 jobs:
   quality-and-build:

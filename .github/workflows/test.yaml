@@ -76,7 +76,7 @@ jobs:
       with:
         args: |
           {
-            "sender": "JOING CI BOT",
+            "sender": [ "JOING CI BOT" ],
             "content":
               " 빌드 성공!!!\n
               **Branch**: ${{ github.ref_name }}\n
@@ -91,7 +91,7 @@ jobs:
       with:
         args: |
           {
-            "sender": "JOING CI BOT",
+            "sender": [ "JOING CI BOT" ],
             "content":
               " 빌드 실패...\n
               **Branch**: ${{ github.ref_name }}\n

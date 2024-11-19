@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
         pip install ruff pylint
     
-    # 코드 품질 체크
+#    # 코드 품질 체크
 #    - name: Code Quality Check with Ruff
 #      run: |
 #        ruff check --select E,F,B,C4,PT,RUF src/
@@ -63,7 +63,7 @@ jobs:
           exit 1
         fi
         
-        echo "Container successfully started and health check passed"
+        echo "Container successfully started ..."
 
     # 빌드 결과 알림
     - name: Send Discord Notification - Success
@@ -71,11 +71,11 @@ jobs:
       uses: sarisia/actions-status-discord@v1
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        title: "🎉 빌드 성공!"
+        title: "빌드 성공!!!"
         description: |
           **Branch**: ${{ github.ref_name }}
           **Build Number**: ${{ github.run_number }}
-        color: 0x28A745  # 초록색
+        color: 0x28A745 # Color Expression: 'GREEN'
         username: JOING CI BOT
 
     - name: Send Discord Notification - Failure
@@ -83,12 +83,12 @@ jobs:
       uses: sarisia/actions-status-discord@v1
       with:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        title: "❌ 빌드 실패"
+        title: "빌드 실패..."
         description: |
           **Branch**: ${{ github.ref_name }}
           **Build Number**: ${{ github.run_number }}
           **Action URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        color: 0xDC3545  # 빨간색
+        color: 0xDC3545 # Color Expression: 'RED'
         username: JOING CI BOT
 
     - name: Cleanup

@@ -1,4 +1,3 @@
-# FastAPI CI pipeline
 name: FastAPI CI Pipeline
 
 on:

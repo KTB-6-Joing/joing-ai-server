@@ -10,16 +10,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir boto3
 
-COPY src /app/src
-
-FROM python:3.12-slim
-
-WORKDIR /app
-
-COPY --from=build /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
-COPY --from=build /usr/local/bin/ /usr/local/bin/
-COPY --from=build /app/src /app/src
-
 ENV PYTHONPATH=/app/src \
     AWS_REGION=ap-northeast-2 \
     PORT=8000
@@ -30,4 +20,3 @@ EXPOSE ${PORT}
 #   CMD curl -v http://localhost:${PORT}/ready | jq -e '.status == "ok"' || exit 1
 
 CMD ["bash", "-c", "uvicorn src.main:app --host 0.0.0.0 --port ${PORT}"]
-

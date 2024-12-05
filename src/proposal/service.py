@@ -9,7 +9,7 @@ from proposal.schemas import ProposalEvaluationRequestDto, ProposalEvaluationRes
 SEP = "[SEP]"
 
 
-def proposal_evaluation(request: ProposalEvaluationRequestDto):
+def proposal_evaluation(request: ProposalEvaluationRequestDto) -> ProposalEvaluationResponseDto:
     # Proposal from the user
     proposal = request.title + SEP \
         + request.content + SEP \
@@ -37,7 +37,7 @@ def proposal_evaluation(request: ProposalEvaluationRequestDto):
             feedback=FeedbackDto(
                 feedback_type=0,
                 current_score=0,
-                comment="마! 기획이 장난이가! \n 양이 이게 뭐꼬? \n 좀 더 채워와라 임마!",
+                comment="기획안을 평가할 내용이 부족하여 더 이상의 평가가 불가능합니다.",
                 violations=[]
             ),
             summary=SummaryDto(
@@ -49,16 +49,23 @@ def proposal_evaluation(request: ProposalEvaluationRequestDto):
 
     # Content Check
     content_evaluation_result = content_evaluation(
-        proposal, content_evaluation_prompt)
-    print(content_evaluation_result)
+        proposal,
+        content_evaluation_prompt
+    )
+
     total_score = float(content_evaluation_result['message']) + float(
         content_evaluation_result['target']) + float(content_evaluation_result['relevance'])
+
     evaluated_proposal = "Message: " + content_evaluation_result['message'] + "Target: " + \
         content_evaluation_result['target'] + "Relevance: " + \
         content_evaluation_result['relevance'] + SEP + proposal
+
     if (total_score < 6.0):
         generated_feedback = content_feedback(
-            content_feedback_prompt=content_feedback_prompt, proposal=evaluated_proposal)
+            content_feedback_prompt=content_feedback_prompt,
+            proposal=evaluated_proposal
+        )
+
         return ProposalEvaluationResponseDto(
             evaluation_result=0,
             feedback=FeedbackDto(
@@ -76,15 +83,23 @@ def proposal_evaluation(request: ProposalEvaluationRequestDto):
 
     # Regulation Check
     regulation_evaluation_result = regulation_evaluation(
-        proposal=proposal, regulation_evaluation_prompt=regulation_evaluation_prompt)
+        proposal=proposal,
+        regulation_evaluation_prompt=regulation_evaluation_prompt
+    )
+
     appropriate = bool(regulation_evaluation_result['appropriate'])
+
     violated_categories = list(regulation_evaluation_result['category'])
+
     if (not appropriate):
-        print("Violation Detected")
         violated_proposal = "Violated Categories: " + \
             str(violated_categories) + SEP + proposal
+
         generated_feedback = regulation_feedback(
-            regulation_feedback_prompt=regulation_feedback_prompt, proposal=violated_proposal)
+            regulation_feedback_prompt=regulation_feedback_prompt,
+            proposal=violated_proposal
+        )
+
         return ProposalEvaluationResponseDto(
             evaluation_result=0,
             feedback=FeedbackDto(
@@ -102,7 +117,9 @@ def proposal_evaluation(request: ProposalEvaluationRequestDto):
 
     # Summary Generator
     generated_summary = summary_generator(
-        proposal=proposal, summary_generation_prompt=summary_generation_prompt)
+        proposal=proposal,
+        summary_generation_prompt=summary_generation_prompt
+    )
 
     return ProposalEvaluationResponseDto(
         evaluation_result=1,
@@ -120,7 +137,7 @@ def proposal_evaluation(request: ProposalEvaluationRequestDto):
     )
 
 
-def summary_generation(request: SummaryGenerationRequestDto):
+def summary_generation(request: SummaryGenerationRequestDto) -> SummaryDto:
     # Proposal retrieved from db
     proposal = request.title + SEP \
         + request.content + SEP \
@@ -134,7 +151,9 @@ def summary_generation(request: SummaryGenerationRequestDto):
 
     # Generator Method
     generated_summary = summary_generator(
-        proposal=proposal, summary_generation_prompt=summary_generation_prompt)
+        proposal=proposal,
+        summary_generation_prompt=summary_generation_prompt
+    )
 
     return ProposalEvaluationResponseDto(
         evaluation_result=1,

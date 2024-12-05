@@ -23,7 +23,7 @@
 │   │   ├── router.py
 │   │   ├── schemas.py
 │   │   └── service.py
-│   ├── rec_system/ # 보류
+│   ├── rec_system/
 │   │   └── ...
 │   ├── config.py
 │   └── main.py

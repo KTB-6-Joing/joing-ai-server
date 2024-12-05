@@ -7,6 +7,7 @@ from io import BytesIO
 def response_preprocessing(playlist_response):
     text_info = []
     thumbnail_urls = []
+
     for item in playlist_response["items"]:
         snippet = item["snippet"]
         # title

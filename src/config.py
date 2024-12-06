@@ -1,3 +1,4 @@
+import os
 from typing import Optional
 import boto3
 from pydantic_settings import BaseSettings
@@ -36,4 +37,6 @@ class Settings(BaseSettings):
         "validate_assignment": True
     }
 
+
 settings = Settings()
+os.environ['OPENAI_API_KEY'] = settings.OPENAI_API_KEY

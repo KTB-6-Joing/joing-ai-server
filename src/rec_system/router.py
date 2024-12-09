@@ -9,8 +9,7 @@ recommendation_service = RecommendationService()
 @router.post("/rec/recommend/item", response_model=CreatorRecommendResponse)
 def recommend_item(data: ItemRecommendRequest):
     try:
-        recommendations = recommendation_service.recommend_for_new_item(
-            data.dict())
+        recommendations = recommendation_service.recommend_for_new_item(data.dict())
         return {
             "recommended_creators": [
                 {
@@ -30,8 +29,7 @@ def recommend_item(data: ItemRecommendRequest):
 @router.post("/rec/recommend/creator", response_model=ItemRecommendResponse)
 def recommend_creator(data: CreatorRecommendRequest):
     try:
-        recommendations = recommendation_service.recommend_for_new_creator(
-            data.dict())
+        recommendations = recommendation_service.recommend_for_new_creator(data.dict())
         return {
             "recommended_items": [
                 {

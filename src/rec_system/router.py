@@ -6,7 +6,7 @@ router = APIRouter()
 recommendation_service = RecommendationService()
 
 
-@router.post("/rec/recommend/item", response_model=CreatorRecommendResponse)
+@router.post("/rec/recommend/creator", response_model=CreatorRecommendResponse)
 def recommend_item(data: ItemRecommendRequest):
     try:
         recommendations = recommendation_service.recommend_for_new_item(data.dict())
@@ -26,7 +26,7 @@ def recommend_item(data: ItemRecommendRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/rec/recommend/creator", response_model=ItemRecommendResponse)
+@router.post("/rec/recommend/item", response_model=ItemRecommendResponse)
 def recommend_creator(data: CreatorRecommendRequest):
     try:
         recommendations = recommendation_service.recommend_for_new_creator(data.dict())

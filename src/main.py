@@ -1,5 +1,4 @@
 from config import settings
-
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from starlette import status
@@ -7,8 +6,6 @@ from starlette import status
 # Routers import
 from rec_system.router import router as rec_router
 
-# config
-from .config import settings
 
 # app init & router
 app = FastAPI()

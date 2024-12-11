@@ -26,10 +26,10 @@ def initialize_world():
 
     # Define paths
     ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
-    INPUT_PATH = join(ROOT_PATH, 'input')
-    OUTPUT_PATH = join(ROOT_PATH, 'output')
-    BOARD_PATH = join(OUTPUT_PATH, 'runs')
-    FILE_PATH = join(OUTPUT_PATH, 'checkpoints')
+    INPUT_PATH = join(ROOT_PATH, '/rec_system/model_lightgcn/input')
+    OUTPUT_PATH = join(ROOT_PATH, '/rec_system/model_lightgcn/output')
+    BOARD_PATH = join(OUTPUT_PATH, '/rec_system/model_lightgcn/runs')
+    FILE_PATH = join(OUTPUT_PATH, '/rec_system/model_lightgcn/output/checkpoints')
 
     # Ensure necessary directories exist
     if not os.path.exists(FILE_PATH):

@@ -12,8 +12,7 @@ CORES = None
 def initialize_world():
 
     global config, device, CORES
-    if config is not None:  # Avoid reinitialization
-        print("DEBUG: world.config already initialized.") # 디버깅 -> 삭제
+    if config is not None:  #
         return
 
     from src.rec_system.model_lightgcn.parse import parse_args
@@ -21,7 +20,7 @@ def initialize_world():
     os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
     # Filter arguments for parse_args
     filtered_args = [arg for arg in sys.argv if arg.startswith("--bpr_batch") or arg.startswith("--latent_dim")]
-    sys.argv = [sys.argv[0]] + filtered_args  # Reset sys.argv to only include valid args
+    sys.argv = [sys.argv[0]] + filtered_args
 
     args = parse_args()
 
@@ -32,18 +31,9 @@ def initialize_world():
     BOARD_PATH = join(OUTPUT_PATH, 'runs')
     FILE_PATH = join(OUTPUT_PATH, 'checkpoints')
 
-    # 디버깅 -> 삭제
-    print("DEBUG: ROOT_PATH =", ROOT_PATH)
-    print("DEBUG: INPUT_PATH =", INPUT_PATH)
-    print("DEBUG: OUTPUT_PATH =", OUTPUT_PATH)
-    print("DEBUG: BOARD_PATH =", BOARD_PATH)
-    print("DEBUG: FILE_PATH =", FILE_PATH)
-
-
     # Ensure necessary directories exist
     if not os.path.exists(FILE_PATH):
         os.makedirs(FILE_PATH, exist_ok=True)
-
 
     # Initialize config
     config = {
@@ -74,9 +64,6 @@ def initialize_world():
         'seed': args.seed,
     }
 
-    # 디버깅 -> 삭제
-    print("DEBUG: Config initialized successfully:", config)
-
     # Device configuration
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     CORES = multiprocessing.cpu_count() // 2  # Use half the available cores
@@ -93,8 +80,6 @@ def initialize_world():
     if model_name not in all_models:
         raise ValueError(f"Model '{model_name}' not supported! Available models: {all_models}")
 
-    # 디버깅 -> 삭제
-    print("DEBUG: world.config after initialization:", config)
 
 # Utility function for colored print
 def cprint(words: str):

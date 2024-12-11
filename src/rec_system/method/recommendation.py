@@ -1,8 +1,8 @@
 import torch
 import pickle
 import warnings
-from rec_system.method.NeuMF import NeuMF
-from rec_system.method.data_preprocess import Loader, TextEmbedder
+from src.rec_system.method.NeuMF import NeuMF
+from src.rec_system.method.data_preprocess import Loader, TextEmbedder
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 

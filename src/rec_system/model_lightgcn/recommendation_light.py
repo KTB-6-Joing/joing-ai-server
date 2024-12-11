@@ -1,8 +1,8 @@
 import torch
 import warnings
-from rec_system.model_lightgcn import world
-from rec_system.model_lightgcn.model import LightGCN
-from rec_system.model_lightgcn.dataloader import SimilarityDataset
+from src.rec_system.model_lightgcn import world
+from src.rec_system.model_lightgcn.model import LightGCN
+from src.rec_system.model_lightgcn.dataloader import SimilarityDataset
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 

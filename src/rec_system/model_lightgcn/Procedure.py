@@ -5,7 +5,7 @@ import numpy as np
 import torch
 from time import time
 import multiprocessing
-from rec_system.model_lightgcn import utils, world
+from src.rec_system.model_lightgcn import utils, world
 
 CORES = multiprocessing.cpu_count() // 2
 

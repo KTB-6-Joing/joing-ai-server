@@ -1,9 +1,9 @@
-from rec_system.model_lightgcn import world
-from rec_system.model_llm.model_llm4rec import TextEmbedder, load_data, generate_graph, LLMCandidateRanker
-from rec_system.method.recommendation import Recommender
-from rec_system.model_lightgcn.recommendation_light import LightGCNRecommender
-from rec_system.model_lightgcn.dataloader import SimilarityDataset
-from rec_system.model_llm.model_llm4rec import (
+from src.rec_system.model_lightgcn import world
+from src.rec_system.model_llm.model_llm4rec import TextEmbedder, load_data, generate_graph, LLMCandidateRanker
+from src.rec_system.method.recommendation import Recommender
+from src.rec_system.model_lightgcn.recommendation_light import LightGCNRecommender
+from src.rec_system.model_lightgcn.dataloader import SimilarityDataset
+from src.rec_system.model_llm.model_llm4rec import (
     recommend_for_new_creator,
     recommend_for_new_item
 )

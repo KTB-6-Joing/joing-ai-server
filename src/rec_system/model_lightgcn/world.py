@@ -13,6 +13,7 @@ def initialize_world():
 
     global config, device, CORES
     if config is not None:  # Avoid reinitialization
+        print("DEBUG: world.config already initialized.") # 디버깅 -> 삭제
         return
 
     from src.rec_system.model_lightgcn.parse import parse_args
@@ -31,9 +32,27 @@ def initialize_world():
     BOARD_PATH = join(OUTPUT_PATH, 'rec_system/model_lightgcn/runs')
     FILE_PATH = join(OUTPUT_PATH, 'rec_system/model_lightgcn/output/checkpoints')
 
+    # 디버깅 -> 삭제
+    print("DEBUG: ROOT_PATH =", ROOT_PATH)
+    print("DEBUG: INPUT_PATH =", INPUT_PATH)
+    print("DEBUG: OUTPUT_PATH =", OUTPUT_PATH)
+    print("DEBUG: BOARD_PATH =", BOARD_PATH)
+    print("DEBUG: FILE_PATH =", FILE_PATH)
+
+    # 디버깅 -> 삭제
+    try:
+        if not os.path.exists(FILE_PATH):
+            print(f"DEBUG: FILE_PATH does not exist. Creating {FILE_PATH}...")
+            os.makedirs(FILE_PATH, exist_ok=True)
+    except Exception as e:
+        print(f"ERROR: Failed to create FILE_PATH: {e}")
+        raise
+
+    '''
     # Ensure necessary directories exist
     if not os.path.exists(FILE_PATH):
         os.makedirs(FILE_PATH, exist_ok=True)
+    '''
 
     # Initialize config
     config = {
@@ -63,6 +82,9 @@ def initialize_world():
         'comment': args.comment,
         'seed': args.seed,
     }
+
+    # 디버깅 -> 삭제
+    print("DEBUG: Config initialized successfully:", config)
 
     # Device configuration
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

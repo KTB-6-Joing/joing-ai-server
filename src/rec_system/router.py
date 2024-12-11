@@ -12,8 +12,6 @@ recommendation_service = None
 async def startup_event():
     global recommendation_service
     initialize_world()
-
-    print("DEBUG: world module location in router:", world.__file__)  # 디버깅 -> 삭제
     print("DEBUG: world.config after initialization in router:", config)  # 디버깅 -> 삭제
     if not config or not isinstance(config, dict):
         raise ValueError("ERROR: world.config was not properly initialized.")

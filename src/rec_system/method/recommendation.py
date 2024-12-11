@@ -1,19 +1,19 @@
 import torch
 import pickle
-from src.rec_system.method.NeuMF import NeuMF
-from src.rec_system.method.data_preprocess import Loader, TextEmbedder
+import warnings
+from rec_system.method.NeuMF import NeuMF
+from rec_system.method.data_preprocess import Loader, TextEmbedder
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 # 추천 시스템 클래스
 class Recommender:
     def __init__(self, model_path, config_path):
-        self.device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         with open(config_path, "rb") as f:
             self.config = pickle.load(f)
-
-        print("로드된 Config 확인:", self.config)
 
         self.model = NeuMF(self.config).to(self.device)
         state_dict = torch.load(model_path, map_location=self.device)
@@ -56,7 +56,8 @@ class Recommender:
         data = {
             'creator_id': self.config['num_users'] - 1,  # 범위를 초과하지 않도록 수정
             'channel_category': self.loader.similarity_matrix.columns.tolist().index(data['channel_category']),
-            'creator_embedding': torch.tensor(self.text_embedder.get_text_embedding(data['channel_name']), dtype=torch.float),
+            'creator_embedding': torch.tensor(self.text_embedder.get_text_embedding(data['channel_name']),
+                                              dtype=torch.float),
             'subscribers': normalized_subscribers,
             'item_category': 0,
             'media_type': 0,
@@ -69,20 +70,14 @@ class Recommender:
         새로운 아이템 데이터에 대해 사용자 추천
         """
         item_data = self.preprocess_new_item(item_data)
-        user_ids_tensor = torch.arange(
-            self.config['num_users'], dtype=torch.long).to(self.device)
-        item_id_tensor = torch.tensor(
-            [item_data['item_id']], dtype=torch.long).to(self.device)
-        item_category_tensor = torch.tensor(
-            [item_data['item_category']], dtype=torch.long).to(self.device)
-        media_type_tensor = torch.tensor(
-            [item_data['media_type']], dtype=torch.long).to(self.device)
+        user_ids_tensor = torch.arange(self.config['num_users'], dtype=torch.long).to(self.device)
+        item_id_tensor = torch.tensor([item_data['item_id']], dtype=torch.long).to(self.device)
+        item_category_tensor = torch.tensor([item_data['item_category']], dtype=torch.long).to(self.device)
+        media_type_tensor = torch.tensor([item_data['media_type']], dtype=torch.long).to(self.device)
 
         # 채널 카테고리와 구독자 수를 기본값으로 설정
-        channel_category_tensor = torch.zeros(
-            1, dtype=torch.long).to(self.device)  # 기본값 0
-        subscribers_tensor = torch.zeros(
-            1, dtype=torch.long).to(self.device)  # 기본값 0
+        channel_category_tensor = torch.zeros(1, dtype=torch.long).to(self.device)  # 기본값 0
+        subscribers_tensor = torch.zeros(1, dtype=torch.long).to(self.device)  # 기본값 0
 
         with torch.no_grad():
             scores = self.model(
@@ -103,7 +98,7 @@ class Recommender:
         for user_id in recommended_user_ids:
             user_metadata = self.user_metadata[user_id]
             recommended_creator_data.append({
-                'creator_id': int(user_id),
+                'creator_id': int(user_id)+1,
                 'channel_category': user_metadata['channel_category'],
                 'channel_name': user_metadata['channel_name'],
                 'subscribers': user_metadata['subscribers']
@@ -119,13 +114,10 @@ class Recommender:
 
         # channel_category 범위 초과 값 처리
         max_channel_category = self.config['num_channel_categories'] - 1
-        creator_data['channel_category'] = min(
-            creator_data['channel_category'], max_channel_category)
+        creator_data['channel_category'] = min(creator_data['channel_category'], max_channel_category)
 
-        user_id_tensor = torch.tensor(
-            [creator_data['creator_id']], dtype=torch.long).to(self.device)
-        item_ids_tensor = torch.arange(
-            self.config['num_items'], dtype=torch.long).to(self.device)
+        user_id_tensor = torch.tensor([creator_data['creator_id']], dtype=torch.long).to(self.device)
+        item_ids_tensor = torch.arange(self.config['num_items'], dtype=torch.long).to(self.device)
 
         with torch.no_grad():
             scores = self.model(
@@ -150,7 +142,7 @@ class Recommender:
         for item_id in recommended_items:
             item_metadata = self.item_metadata[item_id]
             recommended_item_data.append({
-                'item_id': int(item_id),
+                'item_id': int(item_id)+1,
                 'title': item_metadata['title'],
                 'item_category': item_metadata['item_category'],
                 'media_type': item_metadata['media_type'],
@@ -163,8 +155,8 @@ class Recommender:
 
 if __name__ == "__main__":
     # 저장된 모델과 config 경로
-    model_path = "output/neumf_factor8neg4_Epoch4_HR1.0000_NDCG1.0000.model"
-    config_path = "output/config/config_epoch_4.pkl"
+    model_path = "src/rec_system/model/output/neumf_factor8neg4_Epoch4_HR1.0000_NDCG1.0000.model"
+    config_path = "src/rec_system/model/output/config/config_epoch_4.pkl"
 
     # Recommender 초기화
     recommender = Recommender(model_path, config_path)

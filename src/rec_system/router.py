@@ -12,7 +12,10 @@ recommendation_service = None
 async def startup_event():
     global recommendation_service
     initialize_world()
+    if not config or not isinstance(config, dict):
+        raise ValueError("ERROR: world.config was not properly initialized.")
     recommendation_service = RecommendationService()
+
 
 
 @router.post("/rec/recommend/creator", response_model=CreatorRecommendResponse)

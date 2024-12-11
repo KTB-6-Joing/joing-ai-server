@@ -156,7 +156,7 @@ class RecommendationService:
                 if rec_id not in aggregated_results:
                     aggregated_results[rec_id] = {
                         **rec,
-                        "score": weight  # 초기 점수는 가중치로 설정
+                        "score": weight
                     }
                 else:
                     aggregated_results[rec_id]["score"] += weight  # 가중치 누적

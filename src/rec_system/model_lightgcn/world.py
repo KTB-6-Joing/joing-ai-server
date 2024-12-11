@@ -4,15 +4,14 @@ import torch
 import multiprocessing
 import sys
 
-# Lazy initialization for configuration
-config = None  # Global config variable
+config = None
 device = None
 CORES = None
 
 def initialize_world():
 
     global config, device, CORES
-    if config is not None:  #
+    if config is not None:
         return
 
     from src.rec_system.model_lightgcn.parse import parse_args

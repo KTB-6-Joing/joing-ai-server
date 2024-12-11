@@ -5,10 +5,12 @@ from starlette import status
 
 # Routers import
 from rec_system.router import router as rec_router
-
+from rec_system.model_lightgcn.world import initialize_world
 
 # app init & router
 app = FastAPI()
+
+initialize_world()
 app.include_router(rec_router)
 
 

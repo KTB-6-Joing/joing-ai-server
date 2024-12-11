@@ -39,20 +39,11 @@ def initialize_world():
     print("DEBUG: BOARD_PATH =", BOARD_PATH)
     print("DEBUG: FILE_PATH =", FILE_PATH)
 
-    # 디버깅 -> 삭제
-    try:
-        if not os.path.exists(FILE_PATH):
-            print(f"DEBUG: FILE_PATH does not exist. Creating {FILE_PATH}...")
-            os.makedirs(FILE_PATH, exist_ok=True)
-    except Exception as e:
-        print(f"ERROR: Failed to create FILE_PATH: {e}")
-        raise
 
-    '''
     # Ensure necessary directories exist
     if not os.path.exists(FILE_PATH):
         os.makedirs(FILE_PATH, exist_ok=True)
-    '''
+
 
     # Initialize config
     config = {
@@ -102,6 +93,8 @@ def initialize_world():
     if model_name not in all_models:
         raise ValueError(f"Model '{model_name}' not supported! Available models: {all_models}")
 
+    # 디버깅 -> 삭제
+    print("DEBUG: world.config after initialization:", config)
 
 # Utility function for colored print
 def cprint(words: str):

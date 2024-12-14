@@ -61,7 +61,7 @@ class SimilarityDataset(BasicDataset):
         self.item_category_mapping = dict(enumerate(self.items['item_category'].astype("category").cat.categories))
         self.channel_category_mapping = dict(
             enumerate(self.creators['channel_category'].astype("category").cat.categories))
-        self.media_type_mapping = {0: 'short', 1: 'long'}
+        self.media_type_mapping = {0: 'short_type', 1: 'long_type'}
 
         self._similarity_matrix = pd.read_csv(similarity_matrix_file, index_col=0).values
 
@@ -101,8 +101,8 @@ class SimilarityDataset(BasicDataset):
     def _validate_items(self, items):
         items['title'] = items['title'].fillna('unknown')
         items['item_category'] = items['item_category'].fillna('unknown').astype("category").cat.codes
-        items['media_type'] = items['media_type'].fillna('unknown').map({'short': 0, 'long': 1}).fillna(0).astype(int)
-        items['score'] = items['score'].fillna(0).astype(int)
+        items['media_type'] = items['media_type'].fillna('unknown').map({'short_type': 0, 'long_type': 1}).fillna(0).astype(int)
+        items['score'] = items['score'].fillna(0).astype(float)
         items['item_content'] = items['item_content'].fillna('unknown')
         return items
 

@@ -8,12 +8,13 @@ class CreatorRecommendRequest(BaseModel):
     channel_category: str
     subscribers: int
 
-    @field_validator("channel_name", "channel_category","subscribers")
+    @field_validator("channel_name", "channel_category", "subscribers")
     def validate_creator(cls, value, info):
         field_name = info.field_name
         if (field_name in ["channel_name", "channel_category"] and not value.strip()) or (
                 field_name == "subscribers" and value < 0):
-            raise HTTPException(status_code=422, detail="유효하지 않은 크리에이터 입력값입니다.")
+            raise HTTPException(status_code=422,
+                                detail={"code": 'INVALID_CREATOR_INPUT', "message": "유효하지 않은 크리에이터 입력값입니다."})
         return value
 
 
@@ -30,7 +31,8 @@ class ItemRecommendRequest(BaseModel):
         if (field_name in ["title", "item_category", "item_category"] and not value.strip()) or (
                 field_name == "score" and value < 0) or (
                 field_name == "media_type" and value.lower() not in ["short", "long"]):
-            raise HTTPException(status_code=422, detail="유효하지 않은 아이템 입력값입니다.")
+            raise HTTPException(status_code=422,
+                                detail={"code": 'INVALID_ITEM_INPUT', "message": "유효하지 않은 아이템 입력값입니다."})
         return value
 
 

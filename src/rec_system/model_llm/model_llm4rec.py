@@ -350,7 +350,7 @@ def rank_candidates_with_llm(new_data, ranked_candidates, connections, llm_ranke
                     "creator_id": creator['creator_id'],
                     "channel_category": creator['channel_category'],
                     "channel_name": creator['channel_name'],
-                    "subscribers": int(creator['subscribers'])
+                    "subscribers": creator['subscribers']
                 })
 
         else:

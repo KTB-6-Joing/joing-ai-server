@@ -99,7 +99,7 @@ class LightGCNRecommender:
         # Retrieve recommended user metadata
         recommended_users = [
             {
-                'creator_id': int(i),
+                'creator_id': int(i)+1,
                 'channel_name': self.dataset.creators.iloc[i]['channel_name'],
                 'channel_category': self.dataset.channel_category_mapping[
                     self.dataset.creators.iloc[i]['channel_category']],
@@ -122,7 +122,7 @@ class LightGCNRecommender:
         # Retrieve recommended item metadata
         recommended_items = [
             {
-                'item_id': int(i),
+                'item_id': int(i)+1,
                 'title': self.dataset.items.iloc[i]['title'],
                 'item_category': self.dataset.item_category_mapping[self.dataset.items.iloc[i]['item_category']],
                 'media_type': self.dataset.media_type_mapping[self.dataset.items.iloc[i]['media_type']],

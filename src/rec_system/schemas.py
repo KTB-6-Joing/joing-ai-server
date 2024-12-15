@@ -30,7 +30,7 @@ class ItemRecommendRequest(BaseModel):
         field_name = info.field_name
         if (field_name in ["title", "item_category", "item_category"] and not value.strip()) or (
                 field_name == "score" and value < 0) or (
-                field_name == "media_type" and value.lower() not in ["short_type", "long_type"]):
+                field_name == "media_type" and value.lower() not in ["short-form", "long-form"]):
             raise HTTPException(status_code=422,
                                 detail={"code": 'INVALID_ITEM_INPUT', "message": "유효하지 않은 아이템 입력값입니다."})
         return value

@@ -40,7 +40,7 @@ jobs:
         -e AWS_REGION=$AWS_REGION \
         --name joing-ai-test-container -p 8000:8000 joing-ai:latest
         # 컨테이너 실행 대기
-        sleep 120
+        sleep 300
 
         # 컨테이너 상태 확인
         CONTAINER_STATUS=$(docker inspect joing-ai-test-container --format='{{.State.Status}}')

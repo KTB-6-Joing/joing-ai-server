@@ -1,26 +1,101 @@
 creator_id,channel_category,channel_name,subscribers
-1,game,로빈,438000
-2,game,괴물쥐 유튜브,1160000
-3,sports_health,김종국 GYMJONGKOOK,3080000
-4,sports_health,슛포러브,165000
-5,news,빨간아재,702000
-6,government,용혜인,333000
-7,tech,코딩애플,320000
-8,life_style,루아 LuaDoll,3060000
-9,entertainment,DJ SODA OFFICIAL,1820000
-10,entertainment,자이언트 펭 TV,1760000
-11,life_style,백종원 PAIK JONG WON,6660000
-12,life_style,tzuyang쯔양,1100000
-13,entertainment,보겸 TV,1310000
-14,movie,GH'S,2330000
-15,car_auto,전설입장권,1250000
-16,government,슈카월드,3430000
-17,entertainment,차린건 쥐뿔도 없지만,3950000
-18,pet,강형욱의 보듬 TV,2110000
-19,tech,안될과학 Unrealscience ,1220000
-20,travel,계곡은개골개골,431000
-21,travel,미니멀유목민,282000
-22,music,BLACKPINK,"95,100,000"
-23,pet,[THE SOY]루퐁이네,227000
-24,life_style,승비니 Seungbini,2550000
-25,education,EBSDocumentary(EBS 다큐),4450000
+1,game,악동 김블루,1970000
+2,game,문호준,574000
+3,game,T1 Faker,1890000
+4,game,중년게이머 김실장,406000
+5,game,대도서관TV (buzzbean11),1470000
+6,game,테스터훈 TesterHoon,1380000
+7,game,[꿀템TV] 클템 유튜브,416000
+8,game,풍월량,511000
+9,game,김성회의 G식백과,923000
+10,travel,곽튜브,2070000
+11,travel,푸디랜드 FoodieLand,2160000
+12,travel,빠니보틀 Pani Bottle,2370000
+13,travel,wineking 와인킹,645000
+14,travel,킴스트래블 Kim's Travel,260000
+15,travel,정샤크,289000
+16,travel,최준영 박사의 지구본 연구소,525000
+17,pet,왕탱이,29100
+18,pet,뽀송뽀송 bbosong,30000
+19,pet,강형욱의 보듬TV,2110000
+20,pet,밀키복이탄이MilkyBokiTan,2220000
+21,pet,해수인tv yellow aquarium,1110000
+22,pet,집사인생 용시쿠,302000
+23,pet,정브르,1400000
+24,sports_health,피지컬갤러리,3130000
+25,sports_health,김종국 GYM JONG KOOK,3080000
+26,sports_health,꽉잡아윤기-Kwakyoongy,978000
+27,sports_health,흑자헬스 SurplusHealth,830000
+28,sports_health,물리치료사.PT재석,531000
+29,sports_health,세계적으로 유명한 운동 정보,524000
+30,sports_health,골프존,520000
+31,tech,ITSub잇섭,2610000
+32,tech,안될과학 Unrealscience,1220000
+33,tech,1분과학,898000
+34,tech,서울리안 SEOULiAN,869000
+35,tech,조코딩 JoCoding,623000
+36,tech,방구석 리뷰룸,289000
+37,tech,최마태의 POST IT,263000
+38,tech,TAE태영작가,90800
+39,music,1MILLION Dance Studio,26300000
+40,music,창현거리노래방 Korea amazing street performers,2320000
+41,music,때껄룩ᴛᴀᴋᴇ ᴀ ʟᴏᴏᴋ,1930000
+42,music,리플레이LEEPLAY,865000
+43,music,소울뮤직TV,596000
+44,music,Music is my life,506000
+45,music,김광연,378000
+46,kids,DONA 도나,33100000
+47,kids,Boram Tube Vlog [보람튜브 브이로그],30900000
+48,kids,깨비키즈 [KEBIKIDS],4090000
+49,kids,헤이지니 Hey Jini,4060000
+50,kids,슈슈 브이로그 Shushu Vlog,850000
+51,kids,사랑아놀자(Let's Play SARANG),821000
+52,life_style,옐언니,4390000
+53,life_style,허팝Heopop,4260000
+54,life_style,랄랄ralral,1640000
+55,life_style,박하사탕 박소연,61
+56,life_style,책읽기좋은날,920000
+57,life_style,하알라,857000
+58,life_style,나는미도,243000
+59,movie,소맥거핀,8200000
+60,movie,지무비 : G Movie,3600000
+61,movie,총몇명,3520000
+62,movie,짤툰,2960000
+63,movie,필름에빠지다,473000
+64,movie,리뷰 MASTER,368000
+65,movie,리뷰엉이: Owl's Review,1640000
+66,celeb,홍기종기 (이홍기),262000
+67,celeb,다비치 DAVICHI,262000
+68,car_auto,RoCars,2810000
+69,car_auto,MEDCARS,1450000
+70,car_auto,차업차득,691000
+71,car_auto,JPro CarVlog,654000
+72,car_auto,차박사TV,171000
+73,car_auto,카베이 CARBAY,140000
+74,economy,슈카월드,3430000
+75,economy,소비더머니,834000
+76,economy,집코노미,496000
+77,economy,인생부동산,250000
+78,beauty,ssin 씬님,1440000
+79,beauty,오늘의 주우재,1210000
+80,beauty,뷰티포인트 Beauty Point,1190000
+81,beauty,깡스타일리스트,1250000
+82,beauty,관리는 하고 살자,334000
+83,education,지식인사이드,2240000
+84,education,셜록현준,1310000
+85,education,미미미누,1660000
+86,education,지식해적단,1200000
+87,education,공부의신 강성태,974000
+88,education,빡공시대TV,475000
+89,entertainment,채널십오야,6620000
+90,entertainment,차린건 쥐뿔도 없지만,3950000
+91,entertainment,피식대학Psick Univ,2840000
+92,entertainment,흔한남매,2840000
+93,entertainment,보물섬,1920000
+94,entertainment,난쟁이성현,647000
+95,food_cooking,쏘영 Ssoyoung,11300000
+96,food_cooking,tzuyang쯔양,11000000
+97,food_cooking,백종원 PAIK JONG WON,6670000
+98,food_cooking,히밥heebab,1650000
+99,food_cooking,쿡피아 Cookpia,934000
+100,food_cooking,새벽식당,332000

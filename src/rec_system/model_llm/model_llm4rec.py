@@ -122,7 +122,7 @@ def candidates_for_user(user_data, connections, items_df, embedder, top_k=20):
 
 # Stage2
 class LLMCandidateRanker:
-    def __init__(self, api_key, model_name="gpt-4", temperature=0.5):
+    def __init__(self, api_key, model_name="gpt-3.5-turbo", temperature=0.5):
         self.chat_model = ChatOpenAI(
             model=model_name,
             temperature=temperature,
@@ -248,7 +248,7 @@ def generate_candidates(new_data, creators_df, items_df, embedder, connections, 
     return candidates
 
 
-def rank_candidates_with_llm(new_data, ranked_candidates, connections, llm_ranker, id_map, is_item, top_k, creators_df,
+def rank_candidates_with_llm(new_data, ranked_candidates, llm_ranker, id_map, is_item, top_k, creators_df,
                              items_df):
     candidates_str = "\n".join([
         f"({chr(65 + idx)}) {candidate.get('channel_name', 'N/A') if is_item else candidate.get('title', 'N/A')}: "
@@ -257,20 +257,12 @@ def rank_candidates_with_llm(new_data, ranked_candidates, connections, llm_ranke
         for idx, candidate in enumerate(ranked_candidates)
     ])
 
-    graph_context = connections.get(new_data['item_id' if is_item else 'creator_id'], {})
-    if not graph_context:
-        graph_context = {"direct": [], "indirect": []}
-
     prompt = f"""
     ### Instruction:
     Based on the provided information, rank the following candidates in order of preference and return the results in a structured JSON format.
 
     ### New Data:
     {new_data}
-
-    ### Graph Context:
-    Direct Connections: {graph_context.get('direct', [])}
-    Indirect Connections: {graph_context.get('indirect', [])}
 
     ### Candidates:
     {candidates_str}
@@ -454,7 +446,7 @@ def main():
     # Step 6: Initialize LLM Candidate Ranker
     is_item = is_item_data(new_creator_data)
     print(f"\n{'Item' if is_item else 'User'} data detected. Starting LLM re-ranking...")
-    ranker = LLMCandidateRanker(api_key=api_key, model_name="gpt-4", temperature=0.7)
+    ranker = LLMCandidateRanker(api_key=api_key, model_name="gpt-3.5-turbo", temperature=0.7)
 
     # Step 7: Generate recommendations
     print("\n### Recommendations for New Creator ###")

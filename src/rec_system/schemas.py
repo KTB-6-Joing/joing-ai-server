@@ -1,12 +1,42 @@
 from typing import List
-from pydantic import BaseModel,Field,field_validator
+from pydantic import BaseModel, Field, field_validator
 from fastapi import HTTPException
+
+CATEGORY_MAPPING = {
+    "GAME": "game",
+    "TECH": "tech",
+    "EDUCATION": "education",
+    "KNOWHOW_STYLE": "life_style",
+    "NEWS_POLITICS": "economy",
+    "SPORTS": "sports_health",
+    "NONPROFIT_SOCIAL": "government",
+    "PETS_ANIMALS": "pet",
+    "ENTERTAINMENT": "entertainment",
+    "TRAVEL_EVENTS": "travel",
+    "MOVIE_ANIMATION": "movie",
+    "MUSIC": "music",
+    "PEOPLE_BLOG": "celeb",
+    "AUTO_TRANSPORT": "car_auto",
+    "COMEDY": "entertainment",
+    "ETC": "hobbies",
+    "KIDS": "kids",
+    "FOOD_COOKING": "food_cooking"
+}
 
 
 class CreatorRecommendRequest(BaseModel):
     channel_name: str
     channel_category: str
     subscribers: int
+
+    @field_validator("channel_category")
+    def map_channel_category(cls, value):
+        if value not in CATEGORY_MAPPING:
+            raise HTTPException(status_code=422, detail={
+                "code": "INVALID_CREATOR_CATEGORY",
+                "message": "유효하지 않은 크리에이터 카테고리입니다."
+            })
+        return CATEGORY_MAPPING[value]
 
     @field_validator("channel_name", "channel_category", "subscribers")
     def validate_creator(cls, value, info):
@@ -24,6 +54,15 @@ class ItemRecommendRequest(BaseModel):
     media_type: str
     score: float
     item_content: str
+
+    @field_validator("item_category")
+    def map_item_category(cls, value):
+        if value not in CATEGORY_MAPPING:
+            raise HTTPException(status_code=422, detail={
+                "code": "INVALID_ITEM_CATEGORY",
+                "message": "유효하지 않은 아이템 카테고리입니다."
+            })
+        return CATEGORY_MAPPING[value]
 
     @field_validator("title", "item_category", "media_type", "score", "item_content")
     def validate_item(cls, value, info):

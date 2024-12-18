@@ -7,6 +7,7 @@ from src.rec_system.model_llm.model_llm4rec import (
     recommend_for_new_creator,
     recommend_for_new_item
 )
+import os
 
 REVERSE_CATEGORY_MAPPING = {
     "beauty": "KNOWHOW_STYLE",
@@ -18,9 +19,9 @@ REVERSE_CATEGORY_MAPPING = {
     "food_cooking": "FOOD_COOKING",
     "game": "GAME",
     "government": "NONPROFIT_SOCIAL",
-    "hobbies": "KNOWHOW_STYLE",
+    "hobbies": "ETC",
     "kids": "KIDS",
-    "life_style": "KNOWHOW_STYLE",
+    "life_style": "PEOPLE_BLOG",
     "movie": "MOVIE_ANIMATION",
     "music": "MUSIC",
     "news": "NEWS_POLITICS",
@@ -40,7 +41,6 @@ class RecommendationService:
         )
 
         # LLM 모델 초기화
-        load_dotenv()
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise ValueError("Error: OPENAI_API_KEY not found. Please set the API key in your environment.")
@@ -70,8 +70,8 @@ class RecommendationService:
         # 모델별 가중치 설정
         self.model_weights = {
             "neumf": 0.3,  # NeuMF의 가중치
-            "lightgcn": 0.3,  # LightGCN의 가중치
-            "llm": 0.4  # LLM의 가중치
+            "lightgcn": 0.4,  # LightGCN의 가중치
+            "llm": 0.3  # LLM의 가중치
         }
 
     def _ensure_unique_id_llm(self, data, is_item=True):

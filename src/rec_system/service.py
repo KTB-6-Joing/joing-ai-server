@@ -7,9 +7,28 @@ from src.rec_system.model_llm.model_llm4rec import (
     recommend_for_new_creator,
     recommend_for_new_item
 )
-# joing-ai에서 수정 예정
-import os
-from dotenv import load_dotenv
+
+REVERSE_CATEGORY_MAPPING = {
+    "beauty": "KNOWHOW_STYLE",
+    "car_auto": "AUTO_TRANSPORT",
+    "celeb": "PEOPLE_BLOG",
+    "economy": "NEWS_POLITICS",
+    "education": "EDUCATION",
+    "entertainment": "ENTERTAINMENT",
+    "food_cooking": "FOOD_COOKING",
+    "game": "GAME",
+    "government": "NONPROFIT_SOCIAL",
+    "hobbies": "KNOWHOW_STYLE",
+    "kids": "KIDS",
+    "life_style": "KNOWHOW_STYLE",
+    "movie": "MOVIE_ANIMATION",
+    "music": "MUSIC",
+    "news": "NEWS_POLITICS",
+    "pet": "PETS_ANIMALS",
+    "sports_health": "SPORTS",
+    "tech": "TECH",
+    "travel": "TRAVEL_EVENTS",
+}
 
 
 class RecommendationService:
@@ -93,7 +112,7 @@ class RecommendationService:
             connections=self.connections,
             llm_ranker=self.llm_ranker,
             top_k=10
-            )
+        )
 
     def recommend_for_new_creator_llm(self, creator_data):
         creator_data = self._ensure_unique_id_llm(creator_data, is_item=False)
@@ -160,4 +179,13 @@ class RecommendationService:
             reverse=True
         )
 
+        for result in sorted_results:
+            if "channel_category" in result:
+                result["channel_category"] = REVERSE_CATEGORY_MAPPING.get(
+                    result["channel_category"], "ETC"
+                )
+            if "item_category" in result:
+                result["item_category"] = REVERSE_CATEGORY_MAPPING.get(
+                    result["item_category"], "ETC"
+                )
         return sorted_results[:10]

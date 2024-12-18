@@ -6,7 +6,7 @@ CATEGORY_MAPPING = {
     "GAME": "game",
     "TECH": "tech",
     "EDUCATION": "education",
-    "KNOWHOW_STYLE": "life_style",
+    "KNOWHOW_STYLE": "beauty",
     "NEWS_POLITICS": "economy",
     "SPORTS": "sports_health",
     "NONPROFIT_SOCIAL": "government",

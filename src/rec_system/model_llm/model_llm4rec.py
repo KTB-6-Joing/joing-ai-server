@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from langchain.schema import SystemMessage, HumanMessage
 from langchain_openai import ChatOpenAI
 import json, re
-
+import pickle
 
 def is_item_data(data):
     if "item_category" in data and "title" in data:
@@ -45,23 +45,11 @@ def load_data(creator_path, item_path):
 
 # Stage1
 # 그래프 생성 함수
-def generate_graph(creators_df, items_df, embedder):
-    # Create embeddings f
-    creator_embeddings = [embedder.get_text_embedding(text) for text in creators_df['channel_category']]
-    item_embeddings = [embedder.get_text_embedding(text) for text in items_df['item_category']]
-    similarity_matrix = cosine_similarity(creator_embeddings, item_embeddings)
-
-    # Generate pseudo graph connections
-    connections = {}
-    for i, creator in creators_df.iterrows():
-        creator_id = creator['creator_id']
-        connections[creator_id] = {"direct": [], "indirect": []}
-        for j, item in items_df.iterrows():
-            if similarity_matrix[i, j] > 0.6:  # Direct connection threshold
-                connections[creator_id]["direct"].append(item['item_id'])
-            elif similarity_matrix[i, j] > 0.4:  # Indirect connection threshold
-                connections[creator_id]["indirect"].append(item['item_id'])
-    return connections
+def generate_graph(cache_dir="src/rec_system/model_lightgcn/input"):
+    graph_file = os.path.join(cache_dir, "connections.pkl")
+    with open(graph_file, 'rb') as f:
+        connections = pickle.load(f)
+        return connections
 
 
 # Cold-start 후보군 생성 함수

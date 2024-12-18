@@ -358,7 +358,7 @@ def recommend_for_new_creator(new_creator_data, creators_df, items_df, embedder,
                                      is_item=False)
     ranked_candidates, id_map = llm_ranker.re_rank(new_creator_data, candidates, connections, is_item=False)
     final_recommendations = rank_candidates_with_llm(
-        new_creator_data, ranked_candidates, connections, llm_ranker, id_map, is_item=False, top_k=top_k,
+        new_creator_data, ranked_candidates, llm_ranker, id_map, is_item=False, top_k=top_k,
         creators_df=creators_df, items_df=items_df
     )
 
@@ -383,7 +383,7 @@ def recommend_for_new_item(new_item_data, creators_df, items_df, embedder, conne
     candidates = generate_candidates(new_item_data, creators_df, items_df, embedder, connections, top_k, is_item=True)
     ranked_candidates, id_map = llm_ranker.re_rank(new_item_data, candidates, connections, is_item=True)
     final_recommendations = rank_candidates_with_llm(
-        new_item_data, ranked_candidates, connections, llm_ranker, id_map, is_item=True, top_k=top_k,
+        new_item_data, ranked_candidates, llm_ranker, id_map, is_item=True, top_k=top_k,
         creators_df=creators_df, items_df=items_df
     )
 
@@ -441,7 +441,7 @@ def main():
     new_item_data['item_id'] = max_item_id + 1
 
     # Step 5: Generate graph
-    connections = generate_graph(creators_df, items_df, embedder)
+    connections = generate_graph()
 
     # Step 6: Initialize LLM Candidate Ranker
     is_item = is_item_data(new_creator_data)

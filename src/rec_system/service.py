@@ -50,7 +50,7 @@ class RecommendationService:
         creator_path_llm = "src/rec_system/model_lightgcn/input/Creator_random25.csv"
         item_path_llm = "src/rec_system/model_lightgcn/input/Item_random25.csv"
         self.creators_df, self.items_df = load_data(creator_path_llm, item_path_llm)
-        self.connections = generate_graph(self.creators_df, self.items_df, self.embedder)
+        self.connections = generate_graph()
         self.llm_ranker = LLMCandidateRanker(api_key=self.api_key, model_name="gpt-4", temperature=0.7)
 
         # LightGCN 모델 초기화

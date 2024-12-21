@@ -70,8 +70,8 @@ class RecommendationService:
         # 모델별 가중치 설정
         self.model_weights = {
             "neumf": 0.3,  # NeuMF의 가중치
-            "lightgcn": 0.4,  # LightGCN의 가중치
-            "llm": 0.3  # LLM의 가중치
+            "lightgcn": 0.35,  # LightGCN의 가중치
+            "llm": 0.35  # LLM의 가중치
         }
 
     def _ensure_unique_id_llm(self, data, is_item=True):
